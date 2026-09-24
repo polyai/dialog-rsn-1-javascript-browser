@@ -23,6 +23,9 @@ ws.addEventListener("message", (event) => {
     replies.set(msg.item_id, current + msg.delta);
     document.getElementById("reply").textContent = replies.get(msg.item_id);
   }
+  if (msg.type === "error") {
+    console.error(`${msg.error.code}: ${msg.error.message}`);
+  }
 });
 
 document.getElementById("start").addEventListener("click", async () => {
