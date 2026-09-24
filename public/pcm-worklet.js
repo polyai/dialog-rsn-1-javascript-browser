@@ -1,4 +1,4 @@
-// pcm-worklet.js: registered once, runs in the audio rendering thread
+// Registered once, runs in the audio rendering thread
 class PCMWorklet extends AudioWorkletProcessor {
   process(inputs) {
     const channel = inputs[0][0];
