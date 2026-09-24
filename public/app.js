@@ -1,4 +1,5 @@
 const replies = new Map();
+const audioContext = new AudioContext(); // suspended until the click below, but sampleRate is known now
 // The guide connects to wss://your-app.example.com/realtime-relay. Here the relay is
 // whatever server served this page, so derive the URL from the page's own origin.
 const proto = location.protocol === "https:" ? "wss:" : "ws:";
@@ -11,7 +12,7 @@ ws.addEventListener("open", () => {
       instructions: "You are a helpful, concise assistant.",
       output_modalities: ["text"],
       audio: { input: { format: { type: "audio/pcm" } } },
-      poly_input_rate: 48000,
+      poly_input_rate: audioContext.sampleRate,
     },
   }));
 });
@@ -29,8 +30,8 @@ ws.addEventListener("message", (event) => {
 });
 
 document.getElementById("start").addEventListener("click", async () => {
+  await audioContext.resume(); // first, while the click still counts as a user gesture
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const audioContext = new AudioContext();
   await audioContext.audioWorklet.addModule("pcm-worklet.js");
 
   const source = audioContext.createMediaStreamSource(stream);
