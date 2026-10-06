@@ -12,7 +12,7 @@ You need Node 18 or later and a Dialog-RSN-1 API key.
 
 ```bash
 npm install
-cp .env.example .env        # add your DIALOGUE_API_KEY
+cp .env.example .env        # add your DIALOG_API_KEY
 set -a && . ./.env && set +a
 npm start                   # http://localhost:8787
 ```
