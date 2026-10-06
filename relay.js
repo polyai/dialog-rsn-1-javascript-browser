@@ -15,11 +15,11 @@ import { extname, join, normalize } from "node:path";
 import { WebSocketServer, WebSocket } from "ws";
 
 const PORT = process.env.PORT || 8787;
-const UPSTREAM = process.env.DIALOGUE_URL || "wss://api.us.poly.ai/v1/realtime";
-const API_KEY = process.env.DIALOGUE_API_KEY;
+const UPSTREAM = process.env.DIALOG_REALTIME_URL || "wss://api.us.poly.ai/v1/realtime";
+const API_KEY = process.env.DIALOG_API_KEY;
 
 if (!API_KEY) {
-  console.error("DIALOGUE_API_KEY is not set. Copy .env.example to .env and fill it in.");
+  console.error("DIALOG_API_KEY is not set. Copy .env.example to .env and fill it in.");
   process.exit(1);
 }
 
