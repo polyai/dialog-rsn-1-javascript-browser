@@ -36,7 +36,7 @@ The relay holds the key and the browser never sees it:
 
 ```text
 Browser  ->  ws://localhost:8787/realtime-relay   (no key, same-origin)
-Relay    ->  wss://api.us.poly.ai/v1/realtime     (holds the real key)
+Relay    ->  wss://api.studio.poly.ai/v1/realtime     (holds the real key)
 ```
 
 If you write your own relay in Node, set a `User-Agent` on the upstream connection. The API

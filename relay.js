@@ -7,7 +7,7 @@
  * piping frames both ways.
  *
  *   Browser  ->  ws://localhost:8787/realtime-relay      (no key, same-origin)
- *   Relay    ->  wss://api.us.poly.ai/v1/realtime        (holds the real key)
+ *   Relay    ->  wss://api.studio.poly.ai/v1/realtime        (holds the real key)
  */
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
@@ -15,7 +15,7 @@ import { extname, join, normalize } from "node:path";
 import { WebSocketServer, WebSocket } from "ws";
 
 const PORT = process.env.PORT || 8787;
-const UPSTREAM = process.env.DIALOG_REALTIME_URL || "wss://api.us.poly.ai/v1/realtime";
+const UPSTREAM = process.env.DIALOG_REALTIME_URL || "wss://api.studio.poly.ai/v1/realtime";
 const API_KEY = process.env.DIALOG_API_KEY;
 
 if (!API_KEY) {
