@@ -2,16 +2,18 @@
  * The relay from the guide's "Connecting from the browser" section.
  *
  * The browser's native WebSocket cannot set headers, and Dialog-RSN-1 only accepts
- * X-API-KEY, so a page can never authenticate directly. This process serves the
+ * the key in a header (X-API-KEY or Authorization: Bearer), so a page can never
+ * authenticate directly. This process serves the
  * static page and terminates a same-origin WebSocket, holding the real key and
  * piping frames both ways.
  *
- *   Browser  ->  ws://localhost:8787/realtime-relay      (no key, same-origin)
- *   Relay    ->  wss://api.studio.poly.ai/v1/realtime        (holds the real key)
+ *   Browser  ->  ws://localhost:8787/realtime-relay     (no key, same-origin)
+ *   Relay    ->  wss://api.studio.poly.ai/v1/realtime   (holds the real key)
  */
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 import { WebSocketServer, WebSocket } from "ws";
 
 const PORT = process.env.PORT || 8787;
@@ -23,7 +25,9 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-const PUBLIC = new URL("./public/", import.meta.url).pathname;
+// fileURLToPath, not .pathname: a URL path keeps spaces as %20, so a clone under a
+// folder with a space in its name would 404 every file.
+const PUBLIC = fileURLToPath(new URL("./public/", import.meta.url));
 const TYPES = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
