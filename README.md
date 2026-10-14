@@ -19,6 +19,9 @@ npm start                   # http://localhost:8787
 
 Open the page, click **Start talking**, and allow the microphone.
 
+The relay connects to `wss://api.studio.poly.ai/v1/realtime`. To point it at another host, set
+`DIALOG_REALTIME_URL`.
+
 ## What's in it
 
 | File | What it is |
@@ -30,13 +33,13 @@ Open the page, click **Start talking**, and allow the microphone.
 
 ## Why a relay
 
-A browser's native `WebSocket` can't set headers, and Dialog-RSN-1 only accepts the key in the
-`X-API-KEY` header. Even if it could, a key in page code is readable by anyone who opens dev tools.
+A browser's native `WebSocket` can't set headers, and Dialog-RSN-1 only accepts the key in a
+header, `X-API-KEY` or `Authorization: Bearer`. Even if it could, a key in page code is readable by anyone who opens dev tools.
 The relay holds the key and the browser never sees it:
 
 ```text
-Browser  ->  ws://localhost:8787/realtime-relay   (no key, same-origin)
-Relay    ->  wss://api.studio.poly.ai/v1/realtime     (holds the real key)
+Browser  ->  ws://localhost:8787/realtime-relay     (no key, same-origin)
+Relay    ->  wss://api.studio.poly.ai/v1/realtime   (holds the real key)
 ```
 
 If you write your own relay in Node, set a `User-Agent` on the upstream connection. The API
