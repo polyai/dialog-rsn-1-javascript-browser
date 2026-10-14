@@ -17,6 +17,12 @@ ws.addEventListener("open", () => {
   }));
 });
 
+ws.addEventListener("close", () => {
+  // The server closes a connection that sends nothing for 5 minutes, so a page left
+  // unclicked goes quiet. Say so rather than leave a button that does nothing.
+  document.getElementById("reply").textContent = "Disconnected. Reload the page to start again.";
+});
+
 ws.addEventListener("message", (event) => {
   const msg = JSON.parse(event.data);
   if (msg.type === "response.output_text.delta") {
@@ -29,7 +35,9 @@ ws.addEventListener("message", (event) => {
   }
 });
 
-document.getElementById("start").addEventListener("click", async () => {
+const button = document.getElementById("start");
+button.addEventListener("click", async () => {
+  button.disabled = true; // a second click would add a second worklet and send every frame twice
   await audioContext.resume(); // first, while the click still counts as a user gesture
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   await audioContext.audioWorklet.addModule("pcm-worklet.js");
