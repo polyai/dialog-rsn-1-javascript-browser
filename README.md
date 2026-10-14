@@ -8,7 +8,7 @@ renders the reply as it arrives. It uses plain browser APIs, with no framework a
 
 ## Run it
 
-You need Node 18 or later and a Dialog-RSN-1 API key.
+You need Node 18 or later and a Dialog-RSN-1 API key from [studio.poly.ai](https://studio.poly.ai): sign up or log in, then create one in the **API Keys** tab.
 
 ```bash
 npm install
