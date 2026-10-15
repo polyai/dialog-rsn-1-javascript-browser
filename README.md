@@ -1,10 +1,11 @@
 # Dialog-RSN-1 voice agent in the browser
 
-The full example from [Build a voice agent for the browser with JavaScript](https://dialog-rsn-1-eap-docs.pages.dev/dialog-rsn-1/guides/javascript-browser/),
+The full example from [Build a voice agent for the browser with JavaScript](https://docs.poly.ai/dialog-rsn-1/guides/javascript-browser),
 plus the relay the guide describes, so you can run it.
 
 The page captures microphone audio, streams it to Dialog-RSN-1 through a same-origin relay, and
 renders the reply as it arrives. It uses plain browser APIs, with no framework and no build step.
+It asks for text replies with `output_modalities: ["text"]`. By default the API speaks each reply instead.
 
 ## Run it
 
@@ -47,8 +48,8 @@ rejects a handshake without one with a bare 403, and the `ws` package sends none
 
 ## Related
 
-- [Dialog-RSN-1 quickstart](https://dialog-rsn-1-eap-docs.pages.dev/dialog-rsn-1/quickstart/)
-- [Dialog-RSN-1 reference](https://dialog-rsn-1-eap-docs.pages.dev/dialog-rsn-1/reference/)
+- [Dialog-RSN-1 quickstart](https://docs.poly.ai/dialog-rsn-1/quickstart)
+- [Dialog-RSN-1 reference](https://docs.poly.ai/dialog-rsn-1/reference)
 - [Python version of this agent](https://github.com/polyai/dialog-rsn-1-python-from-scratch)
 
 ## License
